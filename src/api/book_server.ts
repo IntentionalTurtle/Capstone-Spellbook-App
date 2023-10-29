@@ -1,7 +1,7 @@
-const token = ''
-const serverURL = ''
+const token = 'ab3546658fb1951f2e892bb2fbc726cd771388227b4bf124'
+const serverURL = 'https://capstone-spellbook-app.onrender.com/api/spells'
 
-export const server_calls = {
+export const book_server_calls = {
     get: async () => { 
         const response = await fetch(serverURL,
         {
@@ -22,7 +22,7 @@ export const server_calls = {
     },
 
     create: async (data: any = {}) => {
-        const response = await fetch(``,
+        const response = await fetch(serverURL,
         {
             method: 'POST',
             headers: {
@@ -42,7 +42,7 @@ export const server_calls = {
     },
 
     update: async (id: string, data:any = {}) => {
-        const response = await fetch(``, //needs id to target the correct contact
+        const response = await fetch(serverURL + '/' + id, //needs id to target the correct contact
         {
             method: 'PUT',
             headers: {
@@ -62,7 +62,7 @@ export const server_calls = {
     },
 
     delete: async (id: string) => { //no data and no body because no data is being sent
-        const response = await fetch(``, //needs id to target the correct contact
+        const response = await fetch(serverURL + '/' + id, //needs id to target the correct contact
         {
             method: 'DELETE',
             headers: {

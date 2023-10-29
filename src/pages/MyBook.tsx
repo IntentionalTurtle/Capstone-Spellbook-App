@@ -1,7 +1,8 @@
+import SpellBookTable from "../components/MyBookTables"
 
 function MyBook() {
   return (
-    <div>MyBook</div>
+    <div><SpellBookTable /></div>
   )
 }
 

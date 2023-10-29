@@ -1,13 +1,13 @@
 import { useState, useEffect } from 'react'
-import { server_calls } from '../api/dndserver'
+import { book_server_calls } from '../api/book_server'
 
-export const useGetData = () => {
-    const [ spellsData, setData ] = useState<[]>([])
+export const useGetMySpellsData = () => {
+    const [ mySpellsData, setSpellsData ] = useState<[]>([])
 
     async function handleDataFetch(){
-        const result = await server_calls.get();
-        console.log(spellsData)
-        setData(result)
+        const result = await book_server_calls.get();
+        console.log(mySpellsData)
+        setSpellsData(result)
     }
 
     
@@ -18,5 +18,5 @@ export const useGetData = () => {
     //If '[]' is used, then will activate on 'mount' (when the component comes into being)
     //If '[componentName]' then it will watch for changes on just the named component and then refresh/activate
 
-    return { spellsData, getData:handleDataFetch}
+    return { mySpellsData, setSpellsData:handleDataFetch}
 }

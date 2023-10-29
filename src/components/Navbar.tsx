@@ -14,14 +14,16 @@ import MenuItem from '@mui/material/MenuItem';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@mui/material/Link';
+import { useAuth0 } from '@auth0/auth0-react';
 
 
 
 const pages = ['Spells', 'Abilities', 'Feats'];
-const settings = ['Characters', 'My Book', 'Logout'];
+const settings = ['Characters', 'My Book'];
 
 
 function Navbar() {
+  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -39,6 +41,14 @@ function Navbar() {
   const handleCloseUserMenu = () => {
     setAnchorElUser(null);
   };
+
+  const signOutOnClick = () => {
+        logout();
+    };
+
+    const signInOnClick = () => {
+        loginWithRedirect();
+    };
 
   return (
     <AppBar position="static" color='secondary'>
@@ -165,6 +175,15 @@ function Navbar() {
                   </Link>
                 </MenuItem>
               ))}
+              { !isAuthenticated ?
+                <MenuItem onClick={signInOnClick}>
+                Login
+                </MenuItem>
+                :
+                <MenuItem onClick={signOutOnClick}>
+                Logout
+                </MenuItem>
+            }
             </Menu>
           </Box>
         </Toolbar>
