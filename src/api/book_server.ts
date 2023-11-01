@@ -1,3 +1,5 @@
+import { Auth0Context } from "@auth0/auth0-react";
+
 const token = 'ab3546658fb1951f2e892bb2fbc726cd771388227b4bf124'
 const serverURL = 'https://capstone-spellbook-app.onrender.com/api/spells'
 

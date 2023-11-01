@@ -1,32 +1,45 @@
-import { Button} from '@mui/material';
 import Input from "./Input"
-
 import { useForm } from 'react-hook-form'
 import { book_server_calls } from '../api/book_server';
-import { useDispatch, useStore } from "react-redux"
-import { chooseSpellID, chooseSpellName, chooseSpellLevel, chooseSpellCastingTime, chooseSpellDuration, chooseSpellClasses} from "../redux/slices/SpellSlices"
+import { server_calls2 } from "../api/dndserver";
+import { useDispatch, useStore } from "react-redux";
+import { chooseSpellID, chooseSpellURL, chooseSpellName, chooseSpellLevel, chooseSpellCastingTime, chooseSpellDuration, chooseSpellClasses} from "../redux/slices/SpellSlices"
+import uuid from 'react-uuid';
 
 interface EditFormProps {
-  id?: string[]
+  id: string
 }
 
 const SpellEditForm = ( props: EditFormProps) => {
   const { register, handleSubmit } = useForm({})
   const dispatch = useDispatch();
   const store = useStore();
-
-
+  async function getURL(id = props.id) {
+    const info = await server_calls2.get('/api/spells/' + id)
+    return info.url
+  }
+ 
 
   const onSubmit = (data: any) => {
     console.log(`ID: ${typeof props.id}`);
     console.log(props.id)
     console.log(data)
+    async function settingValues() {
+      data.id = uuid()
+      data.url = getURL()
+    }
+    async function sendData() {
+      await settingValues()
+      book_server_calls.update(props.id, data)
+    }
     if (props.id && props.id.length > 0) {
-      book_server_calls.update(props.id[0], data)
-      console.log(`Updated: ${ data.first } ${ props.id }`)
+      console.log(data)
+      sendData()      
+      console.log(`Updated: ${ data.name } ${ data.id }`)
       setTimeout(() => {window.location.reload()}, 500)
     } else {
       dispatch(chooseSpellID(data.id));
+      dispatch(chooseSpellURL(data.url));
       dispatch(chooseSpellName(data.name));
       dispatch(chooseSpellLevel(data.level));
       dispatch(chooseSpellCastingTime(data.casting_time));
@@ -42,30 +55,28 @@ const SpellEditForm = ( props: EditFormProps) => {
     <div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
-          <label htmlFor="name">Contact Name</label>
+          <label htmlFor="name">Custom Spell Name</label>
           <Input {...register('name')} name='name' placeholder="Name" />
         </div>
         <div>
-          <label htmlFor="email">Email</label>
-          <Input {...register('email')} name='email' placeholder="Email" />
+          <label htmlFor="level">Level</label>
+          <Input {...register('level')} name='level' placeholder="Level " />
         </div>
         <div>
-          <label htmlFor="phone_number">Phone Number</label>
-          <Input {...register('phone_number')} name='phone_number' placeholder="Phone Number" />
+          <label htmlFor="casting_time">Casting Time</label>
+          <Input {...register('casting_time')} name='casting_time' placeholder="Casting Time" />
         </div>
         <div>
-          <label htmlFor="address">Address</label>
-          <Input {...register('address')} name='address' placeholder="Address" />
+          <label htmlFor="duration">Duration</label>
+          <Input {...register('duration')} name='duration' placeholder="Duration" />
         </div>
         <div>
-          <label htmlFor="name">Contact Name</label>
-          <Input {...register('name')} name='name' placeholder="Name" />
+          <label htmlFor="classes">Classes</label>
+          <Input {...register('classes')} name='classes' placeholder="Classes" />
         </div>
         <div className="flex p-1">
-          <Button className="flex justify-start m-3 bg-slate-300 p-2 rounded hover:bg-slate-800 text-white"
-          >
-            Submit
-          </Button>
+          <input type="submit" 
+          />
         </div>
       </form>
     </div>

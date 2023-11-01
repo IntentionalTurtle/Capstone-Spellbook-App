@@ -6,8 +6,8 @@ export const useGetMySpellsData = () => {
 
     async function handleDataFetch(){
         const result = await book_server_calls.get();
-        console.log(mySpellsData)
         setSpellsData(result)
+        console.log(mySpellsData)
     }
 
     

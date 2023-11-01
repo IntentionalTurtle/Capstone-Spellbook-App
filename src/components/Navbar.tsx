@@ -72,7 +72,6 @@ function Navbar() {
           >
             Character Book
           </Typography>
-
           <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
             <IconButton
               size="large"
@@ -103,9 +102,11 @@ function Navbar() {
               }}
             >
               {pages.map((page) => (
-                <MenuItem key={page} onClick={handleCloseNavMenu}>
-                  <Typography textAlign="center">{page}</Typography>
-                </MenuItem>
+                <MenuItem key={page} onClick={handleCloseUserMenu}>  
+                <Link to={page.replace(/\s+/, "") } component={RouterLink} aria-current="page">
+                  {page}
+                </Link>
+              </MenuItem>
               ))}
             </Menu>
           </Box>
@@ -136,11 +137,11 @@ function Navbar() {
               <Button
                 key={page}
                 onClick={handleCloseNavMenu}
-                sx={{ my: 2, mx: 2.5, color: 'white', display: 'block', fontWeight: 200, fontSize: 'h6.fontSize', fontFamily: '"Helvetica Neue"', fontStyle: 'normal' }}
+                sx={{ my: 2, mx: 2.5, color: 'black', display: 'block', fontWeight: 200, fontSize: 'h6.fontSize', fontFamily: '"Helvetica Neue"', fontStyle: 'normal' }}
               >
-                <Link to={page.replace(/\s+/, "") } component={RouterLink} aria-current="page" color="inherit" underline='hover' textTransform='none'>
+                <Link to={page.replace(/\s+/, "") } component={RouterLink} aria-current="page" color="black" underline='hover' textTransform='none'>
                     {page}
-                  </Link>
+                </Link>
               </Button>
             ))}
           </Box>
@@ -167,6 +168,7 @@ function Navbar() {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >
+              
             {/* TODO Edit Functionality of the profile nav buttons */}
               {settings.map((setting) => (
                 <MenuItem key={setting} onClick={handleCloseUserMenu}>  

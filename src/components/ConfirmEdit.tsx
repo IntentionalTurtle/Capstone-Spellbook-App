@@ -3,13 +3,20 @@ import { useState } from 'react'
 import { Button} from '@mui/material';
 
 type Props = {
-    id?: string[],
+    id: string[];
     open: boolean;
     onClose: () => void;
 }
 
 const ConfirmEdit = ( props: Props ) => {
     let [isSure, setIsSure] = useState(false);
+    //TODO confirm and redesign isSure flag modal
+    const handleCancel = () => {
+        setIsSure(false)
+        props.onClose
+        setTimeout( () => {window.location.reload()})
+    }
+
     if ( !props.open ) return (<></>)
     if ( props.open && !isSure) return (
         <>
@@ -20,14 +27,14 @@ const ConfirmEdit = ( props: Props ) => {
             selected multiple entries, then only the highest one on the table will be edited.
         </p>
         <Button onClick={() => setIsSure(true)}>I Am Sure</Button>
-        <Button>Go Back</Button>
+        <Button onClick={handleCancel}>Go Back</Button>
         </>
     )
     return (
         <div 
-            onClick={ props.onClose } 
-            className='fixed w-full h-full flex overflow-auto z-1 
-            justify-center align-middle bg-gray-300 bg-opacity-25'
+            onClick={ handleCancel } 
+            className='fixed w-full h-full flex overflow-auto focus:z-1 
+            justify-center align-middle bg-gray-300'
         
         >
             <div
@@ -39,12 +46,12 @@ const ConfirmEdit = ( props: Props ) => {
                 <div className="w-full flex flex-col">
                     <div className="flex flex-row space-apart">
                         <p className="flex justify-start m-3 bg-slate-300 p-2 rounded hover:bg-slate-800 text-white"
-                        onClick={props.onClose}>
+                        onClick={handleCancel}>
                             X
                         </p>
                     </div>
                     <div className="flex flex-col items-center text-center mt-3 p-2">
-                        <SpellEditForm id={props.id } />
+                        <SpellEditForm id = { props.id } />
                     </div>
                 </div>
             </div>

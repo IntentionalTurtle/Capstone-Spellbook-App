@@ -31,6 +31,7 @@ function SpellBookTable() {
         setOpen(false)
     }
 
+
     const deleteData = () => {
         book_server_calls.delete(selectionModel[0])
         setSpellsData();
@@ -44,21 +45,16 @@ function SpellBookTable() {
         <ConfirmEdit 
             id={selectionModel}
             open={open}
-            onClose={handleClose}
+            onClose={handleClose} 
         />
+        
         <div className="flex flex-row">
-            <div>
-                <button
-                    className="p-3 bg-slate-300 rounded m-3 hover:bg-slate-800 hover:text-white"
-                    onClick={() => handleOpen()}
-                >
-                    Create New Contact
-                </button>
-            </div> 
             <Button onClick={handleOpen} className="p-3 bg-slate-300 rounded m-3 hover:bg-slate-800 hover:text-white" >Update</Button>
             <Button onClick={deleteData} className="p-3 bg-slate-300 rounded m-3 hover:bg-slate-800 hover:text-white" >Delete</Button>
         </div>
+        { !open ?
         <div style={{ height: 800, width: '100%' }}>
+
         <DataGrid
           autoHeight {...mySpellsData}
           rows={mySpellsData}
@@ -69,7 +65,6 @@ function SpellBookTable() {
             pagination: {
               paginationModel: { page: 0, pageSize: 5 },
             },
-            
           }}
           pageSizeOptions={[5, 10, 25, 50]}
           checkboxSelection = {true}
@@ -77,7 +72,11 @@ function SpellBookTable() {
             setSelectionModel(item)
           }
         />
-      </div>
+        </div>
+        :
+          <></>
+        }
+      
     </>
   )
 }

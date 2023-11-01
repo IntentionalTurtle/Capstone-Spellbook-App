@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Button} from '@mui/material';
 import { book_server_calls } from '../api/book_server';
-// import { useDataGridProps } from '@mui/x-data-grid/DataGrid/useDataGridProps';
 import { useDispatch, useStore } from 'react-redux';
 import { chooseSpellID, chooseSpellURL, chooseSpellName, chooseSpellLevel, chooseSpellCastingTime, chooseSpellDuration, chooseSpellClasses } from "../redux/slices/SpellSlices"
 
@@ -42,7 +41,7 @@ function Spells() {
     dispatch(chooseSpellDuration(spell[0].duration));
     dispatch(chooseSpellClasses(spell[0].classes));
     console.log(store.getState())
-    book_server_calls.create(store.getState())  
+    book_server_calls.create(store.getState()) 
   }
 
 
