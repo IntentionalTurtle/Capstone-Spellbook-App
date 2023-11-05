@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { Button} from '@mui/material';
 
 type Props = {
-    id: string[];
+    id: string;
     open: boolean;
     onClose: () => void;
 }

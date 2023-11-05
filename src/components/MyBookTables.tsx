@@ -43,7 +43,7 @@ function SpellBookTable() {
   return (
     <>
         <ConfirmEdit 
-            id={selectionModel}
+            id={selectionModel.toString()}
             open={open}
             onClose={handleClose} 
         />
