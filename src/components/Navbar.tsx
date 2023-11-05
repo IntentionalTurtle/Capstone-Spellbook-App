@@ -23,7 +23,7 @@ const settings = ['Characters', 'My Book'];
 
 
 function Navbar() {
-  const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
+  const { isAuthenticated, loginWithRedirect, logout, } = useAuth0();
   const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
   const [anchorElUser, setAnchorElUser] = React.useState<null | HTMLElement>(null);
 
@@ -42,8 +42,8 @@ function Navbar() {
     setAnchorElUser(null);
   };
 
-  const signOutOnClick = () => {
-        logout();
+  const signOutOnClick = () => { 
+      logout();
     };
 
     const signInOnClick = () => {

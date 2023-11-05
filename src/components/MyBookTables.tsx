@@ -52,6 +52,7 @@ function SpellBookTable() {
             <Button onClick={handleOpen} className="p-3 bg-slate-300 rounded m-3 hover:bg-slate-800 hover:text-white" >Update</Button>
             <Button onClick={deleteData} className="p-3 bg-slate-300 rounded m-3 hover:bg-slate-800 hover:text-white" >Delete</Button>
         </div>
+
         { !open ?
         <div style={{ height: 800, width: '100%' }}>
 
