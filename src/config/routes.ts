@@ -1,7 +1,7 @@
 import Home from '../pages/Home'
 import Characters from '../pages/Characters'
 import MyBook from '../pages/MyBook'
-import Abilities from '../pages/Abilities';
+import Features from '../pages/Features';
 import Feats from '../pages/Feats';
 import Spells from '../pages/Spells';
 
@@ -33,9 +33,9 @@ const routes: RouteType[] = [
       protected: true
     },
     {
-      path: "/Abilities",
-      component: Abilities,
-      name: "Abilities",
+      path: "/Features",
+      component: Features,
+      name: "Features",
       protected: false
     },
     {

@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react'
-import { book_server_calls } from '../api/book_server'
+import { spell_book_server_calls } from '../api/book_server'
 
 export const useGetMySpellsData = () => {
     const [ mySpellsData, setSpellsData ] = useState<[]>([])
 
     async function handleDataFetch(){
-        const result = await book_server_calls.get();
+        const result = await spell_book_server_calls.get();
         setSpellsData(result)
         console.log(mySpellsData)
     }

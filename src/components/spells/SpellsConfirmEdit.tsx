@@ -8,7 +8,7 @@ type Props = {
     onClose: () => void;
 }
 
-const ConfirmEdit = ( props: Props ) => {
+const SpellsConfirmEdit = ( props: Props ) => {
     let [isSure, setIsSure] = useState(false);
     //TODO confirm and redesign isSure flag modal
     const handleCancel = () => {
@@ -21,10 +21,10 @@ const ConfirmEdit = ( props: Props ) => {
     if ( props.open && !isSure) return (
         <>
         <h3>Are you sure?</h3>
-        <p>This function should only be used in order to edit an existing spell/ability/feat or
-            to create a custom spell/ability/feat. Please remember that anything that you edit 
+        <p>This function should only be used in order to edit an existing spell or
+            to create a custom spell. Please remember that anything that you edit 
             will not be able to be reproduced if you delete it and if you have 
-            selected multiple entries, then only the highest one on the table will be edited.
+            selected multiple entries, then only the first one on the table will be edited.
         </p>
         <Button onClick={() => setIsSure(true)}>I Am Sure</Button>
         <Button onClick={handleCancel}>Go Back</Button>
@@ -59,4 +59,4 @@ const ConfirmEdit = ( props: Props ) => {
     )
 }
 
-export default ConfirmEdit
+export default SpellsConfirmEdit

@@ -1,9 +1,8 @@
-import { book_server_calls } from "../api/book_server"
+import { spell_book_server_calls } from "../../api/book_server"
 import { useState } from 'react'
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { useGetMySpellsData } from '../custom-hooks/FetchData';
-import ConfirmEdit from "./ConfirmEdit";
-import { Button } from "@mui/material";
+import { useGetMySpellsData } from '../../custom-hooks/SpellFetchData';
+import SpellsConfirmEdit from "./SpellsConfirmEdit";
 
 
 const columns: GridColDef[] = [
@@ -33,7 +32,7 @@ function SpellBookTable() {
 
 
     const deleteData = () => {
-        book_server_calls.delete(selectionModel[0])
+        spell_book_server_calls.delete(selectionModel[0])
         setSpellsData();
         console.log(`Selection model: ${selectionModel}`)
         setTimeout( () => {window.location.reload()}, 500)
@@ -42,20 +41,16 @@ function SpellBookTable() {
 
   return (
     <>
-        <ConfirmEdit 
+        <SpellsConfirmEdit 
             id={selectionModel.toString()}
             open={open}
             onClose={handleClose} 
         />
-        
-        <div className="flex flex-row">
-            <Button onClick={handleOpen} className="p-3 bg-slate-300 rounded m-3 hover:bg-slate-800 hover:text-white" >Update</Button>
-            <Button onClick={deleteData} className="p-3 bg-slate-300 rounded m-3 hover:bg-slate-800 hover:text-white" >Delete</Button>
-        </div>
 
         { !open ?
-        <div style={{ height: 800, width: '100%' }}>
-
+        <div style={{ width: '100%', padding: 50 }}>
+          <button onClick={handleOpen} className="p-3 border-black text-white   bg-purple-600 rounded m-3 hover:ring-4" >Update</button>
+          <button onClick={deleteData} className="p-3 border-black text-white   bg-purple-700 rounded m-3 hover:ring-4" >Delete</button>
         <DataGrid
           autoHeight {...mySpellsData}
           rows={mySpellsData}
@@ -64,11 +59,10 @@ function SpellBookTable() {
           initialState={{
             columns: {columnVisibilityModel: {id: false, url: false}},
             pagination: {
-              paginationModel: { page: 0, pageSize: 5 },
+              paginationModel: { page: 0, pageSize: 10 },
             },
           }}
           pageSizeOptions={[5, 10, 25, 50]}
-          checkboxSelection = {true}
           onRowSelectionModelChange={ (item: any) => 
             setSelectionModel(item)
           }

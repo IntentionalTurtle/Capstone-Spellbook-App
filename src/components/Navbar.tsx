@@ -18,7 +18,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 
 
 
-const pages = ['Spells', 'Abilities', 'Feats'];
+const pages = ['Spells', 'Features'];
 const settings = ['Characters', 'My Book'];
 
 

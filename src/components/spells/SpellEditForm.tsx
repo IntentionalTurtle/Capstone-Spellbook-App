@@ -1,9 +1,9 @@
-import Input from "./Input"
+import Input from "../Input"
 import { useForm } from 'react-hook-form'
-import { book_server_calls } from '../api/book_server';
-import { server_calls2 } from "../api/dndserver";
+import { spell_book_server_calls } from '../../api/book_server';
+import { server_calls2 } from "../../api/dndspellserver";
 import { useDispatch, useStore } from "react-redux";
-import { chooseSpellID, chooseSpellURL, chooseSpellName, chooseSpellLevel, chooseSpellCastingTime, chooseSpellDuration, chooseSpellClasses} from "../redux/slices/SpellSlices"
+import { chooseSpellID, chooseSpellURL, chooseSpellName, chooseSpellLevel, chooseSpellCastingTime, chooseSpellDuration, chooseSpellClasses} from "../../redux/slices/SpellSlices"
 import uuid from 'react-uuid';
 
 interface EditFormProps {
@@ -30,7 +30,7 @@ const SpellEditForm = ( props: EditFormProps) => {
     }
     async function sendData() {
       await settingValues()
-      book_server_calls.update(props.id, data)
+      spell_book_server_calls.update(props.id, data)
     }
     if (props.id && props.id.length > 0) {
       console.log(data)
@@ -45,8 +45,9 @@ const SpellEditForm = ( props: EditFormProps) => {
       dispatch(chooseSpellCastingTime(data.casting_time));
       dispatch(chooseSpellDuration(data.duration));
       dispatch(chooseSpellClasses(data.classes));
+      dispatch(chooseSpellClasses(data.desc));
 //dispatch from redux - in order to do an action on the store - this slices the address, name, email, or phone # in order to change the data in the store
-      book_server_calls.create(store.getState())
+      spell_book_server_calls.create(store.getState())
       setTimeout(() => {window.location.reload()}, 500)
     }
   }
@@ -73,6 +74,10 @@ const SpellEditForm = ( props: EditFormProps) => {
         <div>
           <label htmlFor="classes">Classes</label>
           <Input {...register('classes')} name='classes' placeholder="Classes" />
+        </div>
+        <div>
+          <label htmlFor="desc">SpellDescription</label>
+          <Input {...register('desc')} name='desc' placeholder="Custom Description" />
         </div>
         <div className="flex p-1">
           <input type="submit" 

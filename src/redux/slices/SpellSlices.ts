@@ -9,7 +9,8 @@ const rootSlice = createSlice({
         level: "Level",
         casting_time: "Casting Time",
         duration: "Duration",
-        classes: "Classes"
+        classes: "Classes",
+        desc: "Description"
     },
     reducers: {
         //action is submitted elsewhere - written to state.first
@@ -20,9 +21,10 @@ const rootSlice = createSlice({
         chooseSpellCastingTime: (state, action) => { state.casting_time = action.payload},
         chooseSpellDuration: (state, action) => { state.duration = action.payload},
         chooseSpellClasses: (state, action) => { state.classes = action.payload},
+        chooseSpellDescription: (state, action) => { state.desc= action.payload},
               
     }
 })
 
 export const reducer = rootSlice.reducer;
-export const { chooseSpellID, chooseSpellURL, chooseSpellName, chooseSpellLevel, chooseSpellCastingTime, chooseSpellDuration, chooseSpellClasses} = rootSlice.actions
+export const { chooseSpellID, chooseSpellURL, chooseSpellName, chooseSpellLevel, chooseSpellCastingTime, chooseSpellDuration, chooseSpellClasses, chooseSpellDescription} = rootSlice.actions

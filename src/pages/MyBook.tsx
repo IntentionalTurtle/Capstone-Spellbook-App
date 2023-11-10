@@ -1,8 +1,16 @@
-import SpellBookTable from "../components/MyBookTables"
+import FeatureBookTable from "../components/feats/FeatureBookTables"
+import SpellBookTable from "../components/spells/SpellBookTables"
 
 function MyBook() {
   return (
-    <div><SpellBookTable /></div>
+    <div>
+      <div className="flex-auto max-height-800px">
+      <SpellBookTable />
+      </div>
+      <div>
+      <FeatureBookTable />
+      </div>
+    </div>
   )
 }
 
