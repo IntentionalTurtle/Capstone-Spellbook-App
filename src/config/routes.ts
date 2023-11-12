@@ -15,7 +15,7 @@ interface RouteType {
 
 const routes: RouteType[] = [
     {
-      path: "/Home",
+      path: "",
       component: Home,
       name: "Home Screen",
       protected: false
