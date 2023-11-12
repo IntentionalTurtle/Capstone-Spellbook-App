@@ -57,8 +57,15 @@ function FeatureBookTable(props: MyBookProps) {
         
         { !open && !props.spellsEdit ?
         <div style={{ width: '100%', padding: 50 }}>
-          <button onClick={handleOpen} className="p-3 border-black text-white   bg-purple-600 rounded m-3 hover:ring-4" >Update</button>
-          <button onClick={deleteData} className="p-3 border-black text-white   bg-purple-600 rounded m-3 hover:ring-4" >Delete</button>
+          { selectionModel.toString() != '' ? 
+        <>
+        <button onClick={handleOpen} className="p-3 border-black text-white   bg-purple-600 rounded m-3 hover:ring-4" >Update</button>
+        <button onClick={deleteData} className="p-3 border-black text-white   bg-purple-600 rounded m-3 hover:ring-4" >Delete</button> 
+        </>
+        : <>
+        <button className="p-3 border-black text-white opacity-50  bg-purple-600 rounded m-3" >Update</button>
+        <button className="p-3 border-black text-white opacity-50 bg-purple-600 rounded m-3" >Delete</button> 
+        </>}
         <DataGrid
           autoHeight {...myFeaturesData}
           sx={{ zIndex: 0}}

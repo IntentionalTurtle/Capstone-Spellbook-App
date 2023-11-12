@@ -1,5 +1,4 @@
 import Home from '../pages/Home'
-import Characters from '../pages/Characters'
 import MyBook from '../pages/MyBook'
 import Features from '../pages/Features';
 import Feats from '../pages/Feats';
@@ -18,12 +17,6 @@ const routes: RouteType[] = [
       path: "",
       component: Home,
       name: "Home Screen",
-      protected: false
-    },
-    {
-      path: "/Characters",
-      component: Characters,
-      name: "Characters",
       protected: false
     },
     {

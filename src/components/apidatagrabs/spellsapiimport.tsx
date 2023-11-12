@@ -107,13 +107,19 @@ function SpellsAPIImport() {
 
     return (
       <> 
+      <div className='h-6 bg-gradient-to-t from-sky-100 via-sky-200 to-purple-600'></div>
+      <div className='flex flex-col pl-16 bg-sky-100 text-black p-6'>
+        <h2 className='text-2xl font-bold'>Spells</h2>
+        <h3 className='text-m pl-8'>Recommended to filter by class and then sort by level</h3> 
+      </div>   
+      <div className='h-2 bg-gradient-to-t from-white via-sky-50 to-sky-100'></div>
+      <div className='px-16'>
+        <div className='p-6 left-5'></div>
       { selectionModel != '' ?
         <Button variant='contained' onClick={() => transferSpell(selectionModel)}>Add to My Book</Button> 
         :
         <Button disabled>Add to My Book</Button>
       }
-         
-      <div style={{ height: 800, width: '100%', padding: 50 }}>
         <DataGrid
           autoHeight {...spellsData}
           rows={spellsData}

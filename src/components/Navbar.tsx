@@ -15,11 +15,12 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import { Link as RouterLink } from 'react-router-dom';
 import Link from '@mui/material/Link';
 import { useAuth0 } from '@auth0/auth0-react';
+import avatar from '../assets/images/d20 Avatar.jpg'
 
 
 
 const pages = ['Spells', 'Features'];
-const settings = ['Characters', 'My Book'];
+const settings = ['My Book'];
 
 
 function Navbar() {
@@ -103,7 +104,7 @@ function Navbar() {
             >
               {pages.map((page) => (
                 <MenuItem key={page} onClick={handleCloseUserMenu}>  
-                <Link to={page.replace(/\s+/, "") } component={RouterLink} aria-current="page">
+                <Link to={page.replace(/\s+/, "") } component={RouterLink} aria-current="page" >
                   {page}
                 </Link>
               </MenuItem>
@@ -116,7 +117,7 @@ function Navbar() {
             variant="h5"
             noWrap
             component="a"
-            href="/Home"
+            href=""
             sx={{
               mr: 2,
               display: { xs: 'flex', md: 'none' },
@@ -139,17 +140,23 @@ function Navbar() {
                 onClick={handleCloseNavMenu}
                 sx={{ my: 2, mx: 2.5, color: 'black', display: 'block', fontWeight: 200, fontSize: 'h6.fontSize', fontFamily: '"Helvetica Neue"', fontStyle: 'normal' }}
               >
-                <Link to={page.replace(/\s+/, "") } component={RouterLink} aria-current="page" color="black" underline='hover' textTransform='none'>
+                <Link to={page.replace(/\s+/, "") } component={RouterLink} aria-current="page" color="white" underline='hover' textTransform='none'>
                     {page}
                 </Link>
               </Button>
             ))}
           </Box>
-
+          <Box>
+              <Tooltip title="Character List">
+                <IconButton onClick={handleOpenUserMenu} sx={{ mx: 10, color: 'white', fontSize: 'h6.fontSize' }}>
+                  Characters 
+                </IconButton>
+              </Tooltip>
+          </Box> 
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open User Info">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar alt="" src={avatar} />
               </IconButton>
             </Tooltip>
             <Menu
@@ -177,6 +184,7 @@ function Navbar() {
                   </Link>
                 </MenuItem>
               ))}
+              
               { !isAuthenticated ?
                 <MenuItem onClick={signInOnClick}>
                 Login

@@ -2,11 +2,10 @@
 import { server_calls1, server_calls2 } from '../../api/dndfeatureserver';
 import { useState, useEffect } from 'react';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
-import { Button} from '@mui/material';
 import { feature_book_server_calls } from '../../api/book_server';
 import { useDispatch, useStore } from 'react-redux';
 import { chooseID, chooseURL, chooseName, chooseLevel, chooseClasses, chooseDescription } from "../../redux/slices/Slices"
-
+import { Button} from '@mui/material';
 
 
 const columns: GridColDef[] = [
@@ -31,19 +30,19 @@ function FeaturesAPIImport() {
   const transferFeature = async (id:string) => {
     const new_id = id.toString()
     const url = '/api/features/' + new_id
-    console.log(url)
+    // console.log(url)
     const feature = await handleFeatureFetch(url)
-    console.log(feature[0])
-    console.log(feature[0].name)
+    // console.log(feature[0])
+    // console.log(feature[0].name)
     const desc = feature[0].desc.join(' ')
-    console.log(desc) 
+    // console.log(desc) 
     dispatch(chooseID(feature[0].id));
     dispatch(chooseURL(feature[0].url));
     dispatch(chooseName(feature[0].name));
     dispatch(chooseLevel(feature[0].level));
     dispatch(chooseClasses(feature[0].classes));
     dispatch(chooseDescription(desc));
-    console.log(store.getState())
+    // console.log(store.getState())
     try{
     await feature_book_server_calls.create(store.getState())
     window.alert("The class feature was successfully added to your CharacterBook!")
@@ -94,14 +93,21 @@ function FeaturesAPIImport() {
     }
 
     return (
-      <> 
-      { selectionModel != '' ?
-        <Button variant='contained' onClick={() => transferFeature(selectionModel)}>Add to My Book</Button> 
-        :
-        <Button disabled>Add to My Book</Button>
-      }
-         
-      <div style={{ height: 800, width: '100%', padding: 50 }}>
+      <>
+      <div className='h-6 bg-gradient-to-t from-sky-100 via-sky-200 to-purple-600'></div>
+      <div className='flex flex-col pl-16 bg-sky-100 text-black p-6'>
+        <h2 className='text-2xl font-bold'>Class Features</h2>
+        <h3 className='text-m pl-8'>Recommended to filter by class and then sort by level</h3> 
+      </div>   
+      <div className='h-2 bg-gradient-to-t from-white via-sky-50 to-sky-100'></div>
+      <div className='px-16'>
+        <div className='p-6 left-5'>
+        { selectionModel != '' ?
+          <Button variant='contained' onClick={() => transferFeature(selectionModel)}>Add to My Book</Button> 
+          :
+          <Button disabled>Add to My Book</Button>
+        }
+        </div>
         <DataGrid
           autoHeight {...featuresData}
           rows={featuresData}
