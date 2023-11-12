@@ -48,10 +48,7 @@ function FeaturesAPIImport() {
     window.alert("The class feature was successfully added to your CharacterBook!")
     } catch (exception) {
       window.alert("There has been an error! Most common cause is that the feature is already added. Please try again.")
-    }finally{
-      // window.location.reload()
     }
-
   }
 
 

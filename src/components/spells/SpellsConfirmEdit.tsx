@@ -10,11 +10,9 @@ type Props = {
 
 const SpellsConfirmEdit = ( props: Props ) => {
     let [isSure, setIsSure] = useState(false);
-    //TODO confirm and redesign isSure flag modal
     const handleCancel = () => {
         setIsSure(false)
-        props.onClose
-        setTimeout( () => {window.location.reload()})
+        props.onClose()
     }
 
     if ( !props.open ) return (<></>)

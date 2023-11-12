@@ -4,53 +4,39 @@ import {  useEffect, useState } from 'react'
 
 
 function MyBook() {
-  const [isEditingSpells, setIsEditingSpells] = useState(false)
-  const [isEditingFeatures, setIsEditingFeatures] = useState(false)
+  const [isEditing, setIsEditing] = useState(0)
+
   
-  const handleBeginEditSpells = () => {
-    setIsEditingSpells(true)
-  console.log(isEditingSpells)
+  const handleBeginEdit = (num: number) => {
+    setIsEditing(num)
+  console.log(isEditing)
   }
 
-  const handleEndEditSpells = () => {
-    setIsEditingSpells(false)
-    console.log(isEditingSpells)
-  }
-
-  const handleBeginEditFeatures = () => {
-    setIsEditingFeatures(true)
-    console.log(isEditingFeatures)
-  }
-
-  const handleEndEditFeatures = () => {
-    setIsEditingFeatures(false)
-    console.log(isEditingFeatures)
+  const handleEndEdit = () => {
+    setIsEditing(0)
+    console.log(isEditing)
   }
 
   useEffect( () => {
-    console.log(isEditingSpells)
-  },[isEditingSpells])
-
-  useEffect( () => {
-    console.log(isEditingFeatures)
-  },[isEditingFeatures])
+    console.log(isEditing)
+  },[isEditing])
 
   return (
     <>
     <div>
       <div className="flex-auto max-height-800px">
       <SpellBookTable 
-        handleBeginEditSpells={handleBeginEditSpells}
-        handleEndEditSpells={handleEndEditSpells}
-        featureEdit={isEditingFeatures}
+        handleBeginEdit={handleBeginEdit}
+        handleEndEdit={handleEndEdit}
+        editing={isEditing}
 
          />
       </div>
       <div>
       <FeatureBookTable
-      handleBeginEditFeatures={handleBeginEditFeatures}
-      handleEndEditFeatures={handleEndEditFeatures}
-      spellsEdit={isEditingSpells}
+      handleBeginEdit={handleBeginEdit}
+      handleEndEdit={handleEndEdit}
+      editing={isEditing}
        />
       </div>
     </div>

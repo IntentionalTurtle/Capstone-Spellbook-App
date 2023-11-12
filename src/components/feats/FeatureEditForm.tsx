@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { feature_book_server_calls } from '../../api/book_server';
 import { server_calls2 } from "../../api/dndspellserver";
 import { useDispatch, useStore } from "react-redux";
-import { chooseID, chooseURL, chooseName, chooseLevel, chooseClasses, chooseDescription, chooseCastingTime, chooseDuration} from "../../redux/slices/Slices"
+import { chooseID, chooseURL, chooseName, chooseLevel, chooseClasses, chooseDescription} from "../../redux/slices/Slices"
 import uuid from 'react-uuid';
 import { useEffect } from "react";
 
@@ -43,8 +43,6 @@ const FeatureEditForm = ( props: EditFormProps) => {
       dispatch(chooseURL(data.url));
       dispatch(chooseName(data.name));
       dispatch(chooseLevel(data.level));
-      dispatch(chooseCastingTime(''));
-      dispatch(chooseDuration(''))
       dispatch(chooseClasses(data.classes));
       dispatch(chooseDescription(data.desc));
 //dispatch from redux - in order to do an action on the store - this slices the address, name, email, or phone # in order to change the data in the store

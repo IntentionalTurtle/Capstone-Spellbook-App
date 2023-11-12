@@ -17,9 +17,9 @@ const columns: GridColDef[] = [
   ];
 
   interface MyBookProps {
-    handleBeginEditFeatures: any;
-    handleEndEditFeatures: any;
-    spellsEdit: boolean
+    handleBeginEdit: any;
+    handleEndEdit: any;
+    editing: number
 }
 
 function FeatureBookTable(props: MyBookProps) {
@@ -28,12 +28,12 @@ function FeatureBookTable(props: MyBookProps) {
     const [ selectionModel, setSelectionModel ] = useState<string[]>([])
 
     const handleOpen = () => {
-      props.handleBeginEditFeatures();
+      props.handleBeginEdit(2);
       setOpen(true)
     }
 
     const handleClose = () => {
-        props.handleEndEditFeatures();
+        props.handleEndEdit();
         setOpen(false)
     }
 
@@ -55,7 +55,7 @@ function FeatureBookTable(props: MyBookProps) {
         />
         </div>
         
-        { !open && !props.spellsEdit ?
+        { !open && props.editing == 0 ?
         <div style={{ width: '100%', padding: 50 }}>
           { selectionModel.toString() != '' ? 
         <>

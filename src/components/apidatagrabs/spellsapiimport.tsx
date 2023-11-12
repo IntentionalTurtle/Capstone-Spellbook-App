@@ -31,12 +31,12 @@ function SpellsAPIImport() {
   const transferSpell = async (id:string) => {
     const new_id = id.toString()
     const url = '/api/spells/' + new_id
-    console.log(url)
+    // console.log(url)
     const spell = await handleSpellFetch(url)
-    console.log(spell[0])
-    console.log(spell[0].name)
+    // console.log(spell[0])
+    // console.log(spell[0].name)
     const desc = spell[0].desc.join(' ')
-    console.log(desc)
+    // console.log(desc)
     dispatch(chooseID(spell[0].id));
     dispatch(chooseURL(spell[0].url));
     dispatch(chooseName(spell[0].name));
@@ -50,9 +50,7 @@ function SpellsAPIImport() {
     await spell_book_server_calls.create(store.getState())
     window.alert("The spell was successfully added to your CharacterBook!")
     }catch (exception) {
-      window.alert("There has been an error! Most common cause is that your spell is already added. Please try again.")
-    }finally{
-      // window.location.reload()
+    window.alert("There has been an error! Most common cause is that your spell is already added. Please try again.")
     }
   }
 

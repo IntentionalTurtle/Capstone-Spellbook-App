@@ -42,7 +42,7 @@ export const spell_book_server_calls = {
     },
 
     update: async (id: string, data:any = {}) => {
-        const response = await fetch(serverURL + 'spells' + '/' + id, //needs id to target the correct contact
+        const response = await fetch(serverURL + 'spells/' + id, //needs id to target the correct contact
         {
             method: 'PUT',
             headers: {
@@ -62,7 +62,7 @@ export const spell_book_server_calls = {
     },
 
     delete: async (id: string) => { //no data and no body because no data is being sent
-        const response = await fetch(serverURL + 'spells' + '/' + id, //needs id to target the correct contact
+        const response = await fetch(serverURL + 'spells/' + id, //needs id to target the correct contact
         {
             method: 'DELETE',
             headers: {
@@ -123,7 +123,7 @@ export const feature_book_server_calls = {
     },
 
     update: async (id: string, data:any = {}) => {
-        const response = await fetch(serverURL + 'features' + '/' + id, //needs id to target the correct contact
+        const response = await fetch(serverURL + 'features/' + id, //needs id to target the correct contact
         {
             method: 'PUT',
             headers: {
@@ -143,7 +143,7 @@ export const feature_book_server_calls = {
     },
 
     delete: async (id: string) => { //no data and no body because no data is being sent
-        const response = await fetch(serverURL + 'features' + '/' + id, //needs id to target the correct contact
+        const response = await fetch(serverURL + 'features/' + id, //needs id to target the correct contact
         {
             method: 'DELETE',
             headers: {
