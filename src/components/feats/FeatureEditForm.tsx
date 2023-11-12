@@ -3,8 +3,9 @@ import { useForm } from 'react-hook-form'
 import { feature_book_server_calls } from '../../api/book_server';
 import { server_calls2 } from "../../api/dndspellserver";
 import { useDispatch, useStore } from "react-redux";
-import { chooseFeatureID, chooseFeatureURL, chooseFeatureName, chooseFeatureLevel, chooseFeatureClasses, chooseFeatureDescription} from "../../redux/slices/FeatureSlices"
+import { chooseID, chooseURL, chooseName, chooseLevel, chooseClasses, chooseDescription, chooseCastingTime, chooseDuration} from "../../redux/slices/Slices"
 import uuid from 'react-uuid';
+import { useEffect } from "react";
 
 interface EditFormProps {
   id: string
@@ -18,6 +19,8 @@ const FeatureEditForm = ( props: EditFormProps) => {
     const info = await server_calls2.get('/api/features/' + id)
     return info.url
   }
+  useEffect( () => {
+  })
   const onSubmit = (data: any) => {
     console.log(`ID: ${typeof props.id}`);
     console.log(props.id)
@@ -36,12 +39,14 @@ const FeatureEditForm = ( props: EditFormProps) => {
       console.log(`Updated: ${ data.name } ${ data.id }`)
       setTimeout(() => {window.location.reload()}, 500)
     } else {
-      dispatch(chooseFeatureID(data.id));
-      dispatch(chooseFeatureURL(data.url));
-      dispatch(chooseFeatureName(data.name));
-      dispatch(chooseFeatureLevel(data.level));
-      dispatch(chooseFeatureClasses(data.classes));
-      dispatch(chooseFeatureDescription(data.desc));
+      dispatch(chooseID(data.id));
+      dispatch(chooseURL(data.url));
+      dispatch(chooseName(data.name));
+      dispatch(chooseLevel(data.level));
+      dispatch(chooseCastingTime(''));
+      dispatch(chooseDuration(''))
+      dispatch(chooseClasses(data.classes));
+      dispatch(chooseDescription(data.desc));
 //dispatch from redux - in order to do an action on the store - this slices the address, name, email, or phone # in order to change the data in the store
       feature_book_server_calls.create(store.getState())
       setTimeout(() => {window.location.reload()}, 500)
@@ -49,8 +54,8 @@ const FeatureEditForm = ( props: EditFormProps) => {
   }
  //register comes from react-hook-form and is used to validate the data - register sends from store to database
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
+    <div className="overflow-y-scroll">
+      <form onSubmit={handleSubmit(onSubmit)} >
         <div>
           <label htmlFor="name">Custom Spell Name</label>
           <Input {...register('name')} name='name' placeholder="Name" />

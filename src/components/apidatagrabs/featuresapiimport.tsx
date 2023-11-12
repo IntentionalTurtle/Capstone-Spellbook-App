@@ -5,7 +5,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Button} from '@mui/material';
 import { feature_book_server_calls } from '../../api/book_server';
 import { useDispatch, useStore } from 'react-redux';
-import { chooseFeatureID, chooseFeatureURL, chooseFeatureName, chooseFeatureLevel, chooseFeatureClasses, chooseFeatureDescription } from "../../redux/slices/FeatureSlices"
+import { chooseID, chooseURL, chooseName, chooseLevel, chooseClasses, chooseDescription } from "../../redux/slices/Slices"
 
 
 
@@ -14,6 +14,8 @@ const columns: GridColDef[] = [
   { field: 'url', headerName: 'URL', flex: 1 },
   { field: 'name', headerName: 'Name', flex: 2 },
   { field: 'level', headerName: 'Level Gained', flex: 2 },
+  { field: 'casting_time', headerName: 'Casting Time', flex: 1 },
+  { field: 'duration', headerName: 'Duration', flex: 1 },
   { field: 'classes', headerName: 'Class', flex: 1 },
   { field: 'desc', headerName: 'Class Feature Description', flex: 8},
 ];
@@ -34,19 +36,19 @@ function FeaturesAPIImport() {
     console.log(feature[0])
     console.log(feature[0].name)
     const desc = feature[0].desc.join(' ')
-    console.log(desc)
-    dispatch(chooseFeatureID(feature[0].id));
-    dispatch(chooseFeatureURL(feature[0].url));
-    dispatch(chooseFeatureName(feature[0].name));
-    dispatch(chooseFeatureLevel(feature[0].level));
-    dispatch(chooseFeatureClasses(feature[0].classes));
-    dispatch(chooseFeatureDescription(desc));
+    console.log(desc) 
+    dispatch(chooseID(feature[0].id));
+    dispatch(chooseURL(feature[0].url));
+    dispatch(chooseName(feature[0].name));
+    dispatch(chooseLevel(feature[0].level));
+    dispatch(chooseClasses(feature[0].classes));
+    dispatch(chooseDescription(desc));
     console.log(store.getState())
     try{
     await feature_book_server_calls.create(store.getState())
-    window.alert("The spell was successfully added to your CharacterBook!")
+    window.alert("The class feature was successfully added to your CharacterBook!")
     } catch (exception) {
-      window.alert("There has been an error! Most common causes: Multiple Boxes Checked or Spell Already Added. Please try again.")
+      window.alert("There has been an error! Most common cause is that the feature is already added. Please try again.")
     }finally{
       // window.location.reload()
     }
@@ -106,7 +108,7 @@ function FeaturesAPIImport() {
           columns={columns}
           getRowHeight={() => 'auto'}
           initialState={{
-            columns: {columnVisibilityModel: {id: false, url: false}},
+            columns: {columnVisibilityModel: {id: false, url: false, casting_time: false, duration: false}},
             pagination: {
               paginationModel: { page: 0, pageSize: 10 },
             },

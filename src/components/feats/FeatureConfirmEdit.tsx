@@ -33,24 +33,25 @@ const FeatureConfirmEdit = ( props: Props ) => {
     return (
         <div 
             onClick={ handleCancel } 
-            className='fixed w-full h-full flex overflow-auto focus:z-1 
+            className='fixed w-full h-full flex overflow-auto focus:z-10 
             justify-center align-middle bg-gray-300'
         
         >
             <div
-                className='max-w-600px w-2/5 fixed flex z-1 mt-20 bg-white shadow-xl rounded'
+                className='max-w-600px w-2/5 fixed flex z-10 mt-20 bg-white shadow-xl rounded'
                 onClick={(e) => {
                     e.stopPropagation()
                 }}
             >
-                <div className="w-full flex flex-col">
+                
+                <div className="w-full flex flex-col z-50 bg-opacity-100 bg-white text-black"> 
                     <div className="flex flex-row space-apart">
-                        <p className="flex justify-start m-3 bg-slate-300 p-2 rounded hover:bg-slate-800 text-white"
+                        <p className="flex justify-start m-3 z-10 bg-slate-300 p-2 rounded hover:bg-slate-800 text-black"
                         onClick={handleCancel}>
-                            X
+                            X 
                         </p>
                     </div>
-                    <div className="flex flex-col items-center text-center mt-3 p-2">
+                    <div className="flex flex-col items-center text-center mt-3 p-2 z-10">
                         <FeatureEditForm id = { props.id } />
                     </div>
                 </div>

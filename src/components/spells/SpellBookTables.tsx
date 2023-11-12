@@ -16,18 +16,25 @@ const columns: GridColDef[] = [
     { field: 'desc', headerName: 'Spell Description', flex: 8},
   ];
 
+interface MyBookProps {
+    handleBeginEditSpells: () => void;
+    handleEndEditSpells: () => void;
+    featureEdit: boolean
+}
 
-function SpellBookTable() {
+function SpellBookTable( props: MyBookProps) {
     let [ open, setOpen ] = useState(false);
     const { mySpellsData, setSpellsData } = useGetMySpellsData();
     const [ selectionModel, setSelectionModel ] = useState<string[]>([])
 
     const handleOpen = () => {
-        setOpen(true)
-    }
+      props.handleBeginEditSpells()
+      setOpen(true)
+  }
 
     const handleClose = () => {
-        setOpen(false)
+      props.handleEndEditSpells()
+      setOpen(false)
     }
 
 
@@ -38,21 +45,23 @@ function SpellBookTable() {
         setTimeout( () => {window.location.reload()}, 500)
     }
 
-
   return (
     <>
+        <div className="z-2">
         <SpellsConfirmEdit 
             id={selectionModel.toString()}
             open={open}
-            onClose={handleClose} 
+            onClose={handleClose}
         />
+        </div>
 
-        { !open ?
+        { !open && !props.featureEdit ?
         <div style={{ width: '100%', padding: 50 }}>
-          <button onClick={handleOpen} className="p-3 border-black text-white   bg-purple-600 rounded m-3 hover:ring-4" >Update</button>
-          <button onClick={deleteData} className="p-3 border-black text-white   bg-purple-700 rounded m-3 hover:ring-4" >Delete</button>
+        <button onClick={handleOpen} className="p-3 border-black text-white   bg-purple-600 rounded m-3 hover:ring-4" >Update</button>
+        <button onClick={deleteData} className="p-3 border-black text-white   bg-purple-600 rounded m-3 hover:ring-4" >Delete</button> 
         <DataGrid
           autoHeight {...mySpellsData}
+          sx={{ zIndex: 0}}
           rows={mySpellsData}
           columns={columns}
           getRowHeight={() => 'auto'}

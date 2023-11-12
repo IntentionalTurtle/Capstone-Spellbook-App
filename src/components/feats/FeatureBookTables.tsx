@@ -9,22 +9,31 @@ const columns: GridColDef[] = [
     { field: 'id', headerName: 'Index', flex: 1 },
     { field: 'url', headerName: 'URL', flex: 1 },
     { field: 'name', headerName: 'Name', flex: 1 },
-    { field: 'level', headerName: 'Spell Level', flex: 1 },
+    { field: 'level', headerName: 'Level Gained', flex: 1 },
+    { field: 'casting_time', headerName: 'Casting Time', flex: 1 },
+    { field: 'duration', headerName: 'Duration', flex: 1 },
     { field: 'classes', headerName: 'Classes', flex: 1 },
-    { field: 'desc', headerName: 'Spell Description', flex: 8},
+    { field: 'desc', headerName: 'Feature Description', flex: 8},
   ];
 
+  interface MyBookProps {
+    handleBeginEditFeatures: any;
+    handleEndEditFeatures: any;
+    spellsEdit: boolean
+}
 
-function FeatureBookTable() {
+function FeatureBookTable(props: MyBookProps) {
     let [ open, setOpen ] = useState(false);
     const { myFeaturesData, setFeaturesData } = useGetMyFeaturesData();
     const [ selectionModel, setSelectionModel ] = useState<string[]>([])
 
     const handleOpen = () => {
-        setOpen(true)
+      props.handleBeginEditFeatures();
+      setOpen(true)
     }
 
     const handleClose = () => {
+        props.handleEndEditFeatures();
         setOpen(false)
     }
 
@@ -36,30 +45,28 @@ function FeatureBookTable() {
         setTimeout( () => {window.location.reload()}, 500)
     }
 
-
   return (
     <>
+        <div >
         <FeatureConfirmEdit
             id={selectionModel.toString()}
             open={open}
             onClose={handleClose} 
         />
-        
-        <div className="flex flex-row">
-            
         </div>
-
-        { !open ?
+        
+        { !open && !props.spellsEdit ?
         <div style={{ width: '100%', padding: 50 }}>
           <button onClick={handleOpen} className="p-3 border-black text-white   bg-purple-600 rounded m-3 hover:ring-4" >Update</button>
-          <button onClick={deleteData} className="p-3 border-black text-white   bg-purple-700 rounded m-3 hover:ring-4" >Delete</button>
+          <button onClick={deleteData} className="p-3 border-black text-white   bg-purple-600 rounded m-3 hover:ring-4" >Delete</button>
         <DataGrid
           autoHeight {...myFeaturesData}
+          sx={{ zIndex: 0}}
           rows={myFeaturesData}
           columns={columns}
           getRowHeight={() => 'auto'}
           initialState={{
-            columns: {columnVisibilityModel: {id: false, url: false}},
+            columns: {columnVisibilityModel: {id: false, url: false, casting_time: false, duration: false}},
             pagination: {
               paginationModel: { page: 0, pageSize: 10 },
             },

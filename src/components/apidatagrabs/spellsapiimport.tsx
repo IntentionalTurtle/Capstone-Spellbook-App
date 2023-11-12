@@ -5,7 +5,7 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Button} from '@mui/material';
 import { spell_book_server_calls } from '../../api/book_server';
 import { useDispatch, useStore } from 'react-redux';
-import { chooseSpellID, chooseSpellURL, chooseSpellName, chooseSpellLevel, chooseSpellCastingTime, chooseSpellDuration, chooseSpellClasses, chooseSpellDescription } from "../../redux/slices/SpellSlices"
+import { chooseID, chooseURL, chooseName, chooseLevel, chooseCastingTime, chooseDuration, chooseClasses, chooseDescription } from "../../redux/slices/Slices"
 
 
 
@@ -37,24 +37,23 @@ function SpellsAPIImport() {
     console.log(spell[0].name)
     const desc = spell[0].desc.join(' ')
     console.log(desc)
-    dispatch(chooseSpellID(spell[0].id));
-    dispatch(chooseSpellURL(spell[0].url));
-    dispatch(chooseSpellName(spell[0].name));
-    dispatch(chooseSpellLevel(spell[0].level));
-    dispatch(chooseSpellCastingTime(spell[0].casting_time));
-    dispatch(chooseSpellDuration(spell[0].duration));
-    dispatch(chooseSpellClasses(spell[0].classes));
-    dispatch(chooseSpellDescription(desc));
+    dispatch(chooseID(spell[0].id));
+    dispatch(chooseURL(spell[0].url));
+    dispatch(chooseName(spell[0].name));
+    dispatch(chooseLevel(spell[0].level));
+    dispatch(chooseCastingTime(spell[0].casting_time));
+    dispatch(chooseDuration(spell[0].duration));
+    dispatch(chooseClasses(spell[0].classes));
+    dispatch(chooseDescription(desc));
     console.log(store.getState())
     try{
     await spell_book_server_calls.create(store.getState())
     window.alert("The spell was successfully added to your CharacterBook!")
-    } catch (exception) {
-      window.alert("There has been an error! Most common causes: Multiple Boxes Checked or Spell Already Added. Please try again.")
+    }catch (exception) {
+      window.alert("There has been an error! Most common cause is that your spell is already added. Please try again.")
     }finally{
       // window.location.reload()
     }
-
   }
 
 

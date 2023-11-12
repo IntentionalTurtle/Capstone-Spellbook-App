@@ -3,7 +3,7 @@ import { useForm } from 'react-hook-form'
 import { spell_book_server_calls } from '../../api/book_server';
 import { server_calls2 } from "../../api/dndspellserver";
 import { useDispatch, useStore } from "react-redux";
-import { chooseSpellID, chooseSpellURL, chooseSpellName, chooseSpellLevel, chooseSpellCastingTime, chooseSpellDuration, chooseSpellClasses} from "../../redux/slices/SpellSlices"
+import { chooseID, chooseURL, chooseName, chooseLevel, chooseCastingTime, chooseDuration, chooseClasses} from "../../redux/slices/Slices"
 import uuid from 'react-uuid';
 
 interface EditFormProps {
@@ -38,14 +38,14 @@ const SpellEditForm = ( props: EditFormProps) => {
       console.log(`Updated: ${ data.name } ${ data.id }`)
       setTimeout(() => {window.location.reload()}, 500)
     } else {
-      dispatch(chooseSpellID(data.id));
-      dispatch(chooseSpellURL(data.url));
-      dispatch(chooseSpellName(data.name));
-      dispatch(chooseSpellLevel(data.level));
-      dispatch(chooseSpellCastingTime(data.casting_time));
-      dispatch(chooseSpellDuration(data.duration));
-      dispatch(chooseSpellClasses(data.classes));
-      dispatch(chooseSpellClasses(data.desc));
+      dispatch(chooseID(data.id));
+      dispatch(chooseURL(data.url));
+      dispatch(chooseName(data.name));
+      dispatch(chooseLevel(data.level));
+      dispatch(chooseCastingTime(data.casting_time));
+      dispatch(chooseDuration(data.duration));
+      dispatch(chooseClasses(data.classes));
+      dispatch(chooseClasses(data.desc));
 //dispatch from redux - in order to do an action on the store - this slices the address, name, email, or phone # in order to change the data in the store
       spell_book_server_calls.create(store.getState())
       setTimeout(() => {window.location.reload()}, 500)
@@ -53,7 +53,7 @@ const SpellEditForm = ( props: EditFormProps) => {
   }
  //register comes from react-hook-form and is used to validate the data - register sends from store to database
   return (
-    <div>
+    <div className="overflow-y-scroll">
       <form onSubmit={handleSubmit(onSubmit)}>
         <div>
           <label htmlFor="name">Custom Spell Name</label>
